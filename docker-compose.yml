@@ -1,0 +1,23 @@
+version:'2'
+services:
+        cdn:
+           image: vasanth3g/apache_trafficserver
+           ports:
+           - "8006:8006"
+           - "8007:8007"
+           environment:
+           - HOSTS=192.168.1.141
+           - LIVE_PORT=8006
+           - VOD_PORT=8007
+           - LIVE_ORIGIN=httpd
+           - VOD_ORIGIN=nginx
+           networks:
+               - frontend
+           httpd:
+                image: httpd
+           nginx:
+                image: nginx
+                
+networks:
+        frontend:
+           driver: bridge
